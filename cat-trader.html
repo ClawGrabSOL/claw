@@ -250,22 +250,22 @@
 <header>
   <div class="logo">
     <span class="cat-emoji">😼</span>
-    <span class="logo-text">CAT <span>TRADER</span></span>
+    <span class="logo-text">MISO <span>TRADER</span></span>
   </div>
   <div class="header-right">
     <div class="live-badge"><div class="live-dot"></div>LIVE</div>
-    <a class="solscan-link" id="solscanLink" href="#" target="_blank">View on Solscan ↗</a>
-    <a href="https://x.com/clawnode" target="_blank" style="font-size:13px;color:#b44aff;font-weight:700;text-decoration:none">@clawnode 𝕏</a>
+    <a class="solscan-link" id="solscanLink" href="https://solscan.io/account/EnB8D6zVaj3QEMiiWXqhvE3hJdCytNVedpxnqjsQSnfN" target="_blank">View on Solscan ↗</a>
+    <a href="https://x.com/misodotfun" target="_blank" style="font-size:13px;color:#b44aff;font-weight:700;text-decoration:none">@misodotfun 𝕏</a>
   </div>
 </header>
 
 <!-- WALLET BAR -->
 <div class="wallet-bar">
   <span class="wallet-label">Wallet:</span>
-  <input class="wallet-input" id="walletInput" placeholder="Enter Solana wallet address..." spellcheck="false"/>
+  <input class="wallet-input" id="walletInput" value="EnB8D6zVaj3QEMiiWXqhvE3hJdCytNVedpxnqjsQSnfN" spellcheck="false"/>
   <span class="wallet-label" style="margin-left:8px">Helius Key:</span>
-  <input class="api-input" id="apiKeyInput" placeholder="Helius API key (free at helius.dev)" spellcheck="false"/>
-  <button class="track-btn" id="trackBtn" onclick="startTracking()">🐱 TRACK CAT</button>
+  <input class="api-input" id="apiKeyInput" value="7781ce31-649f-41a7-8562-2dcef3701b46" spellcheck="false"/>
+  <button class="track-btn" id="trackBtn" onclick="startTracking()">😼 TRACK MISO</button>
 </div>
 
 <!-- STATS ROW -->
@@ -291,10 +291,10 @@
     <div id="tradeFeed">
       <div class="empty-state">
         <span class="empty-cat">😼</span>
-        <h3>Cat is waiting to trade...</h3>
-        <p>Enter a Solana wallet address above and your Helius API key.<br/>The cat will track every meme coin buy & sell in real time.</p>
+        <h3>Miso is warming up...</h3>
+        <p>Loading Miso's live meme coin trades from Solana.<br/>Every buy & sell will appear here in real time.</p>
         <br/>
-        <p style="font-size:12px;color:#3a3a5a">Get a free Helius API key at <a href="https://helius.dev" target="_blank" style="color:var(--primary)">helius.dev</a></p>
+        <p style="font-size:12px;color:#3a3a5a">Follow <a href="https://x.com/misodotfun" target="_blank" style="color:var(--primary)">@misodotfun</a> on X</p>
       </div>
     </div>
   </div>
@@ -305,8 +305,9 @@
     <!-- CAT STATUS -->
     <div class="sidebar-section cat-status">
       <span class="cat-big sleeping" id="catEmoji">😴</span>
-      <div class="cat-mood" id="catMood">Cat is sleeping</div>
+      <div class="cat-mood" id="catMood">Miso is sleeping</div>
       <div class="cat-mood-sub" id="catMoodSub">No recent activity</div>
+      <div style="margin-top:8px"><a href="https://x.com/misodotfun" target="_blank" style="font-size:12px;color:var(--primary);font-weight:700;text-decoration:none">@misodotfun 𝕏</a></div>
       <div class="cat-bpm">
         <span class="heart">❤️</span>
         <span class="bpm-num" id="catBpm">—</span>
@@ -609,14 +610,14 @@ function updateCatMood() {
 
   if (age < 60000) {
     cat.textContent = '😼'; cat.className = 'cat-big trading';
-    mood.textContent = recentTrade.side === 'buy' ? '🟢 Cat is BUYING' : '🔴 Cat is SELLING';
+    mood.textContent = recentTrade.side === 'buy' ? '🟢 Miso is BUYING' : '🔴 Miso is SELLING';
     sub.textContent = 'Actively trading';
   } else if (age < 300000) {
     cat.textContent = '😺'; cat.className = 'cat-big';
-    mood.textContent = 'Cat is alert'; sub.textContent = 'Recent activity';
+    mood.textContent = 'Miso is alert'; sub.textContent = 'Recent activity';
   } else {
     cat.textContent = '😴'; cat.className = 'cat-big sleeping';
-    mood.textContent = 'Cat is sleeping'; sub.textContent = 'No recent activity';
+    mood.textContent = 'Miso is sleeping'; sub.textContent = 'No recent activity';
   }
 }
 
@@ -708,9 +709,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (params.get('key')) {
     document.getElementById('apiKeyInput').value = params.get('key');
   }
-  if (params.get('wallet') && params.get('key')) {
-    startTracking();
-  }
+  // Auto-start with Miso's wallet
+  startTracking();
 });
 </script>
 </body>
