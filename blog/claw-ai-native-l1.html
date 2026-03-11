@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>$CLAW: The First L1 Built for AI Agents — And Why It Changes Everything</title>
+  <link rel="stylesheet" href="../css/style.css"/>
+  <script src="../js/head-inject.js" defer></script>
+  <style>
+    .article-wrap { max-width:780px; margin:0 auto; padding:60px 40px; }
+    .article-wrap h1 { font-size:38px; font-weight:900; line-height:1.15; color:#0a0a0f; margin-bottom:20px; }
+    .article-wrap h2 { font-size:24px; font-weight:800; margin:52px 0 16px; color:#0a0a0f; border-left:4px solid var(--primary); padding-left:16px; }
+    .article-wrap h3 { font-size:18px; font-weight:700; margin:32px 0 12px; color:#222; }
+    .article-wrap p { font-size:16px; line-height:1.85; color:#3a3a3a; margin-bottom:20px; }
+    .article-wrap ul, .article-wrap ol { padding-left:28px; margin-bottom:20px; }
+    .article-wrap li { font-size:15px; line-height:1.8; color:#3a3a3a; margin-bottom:6px; }
+    .article-wrap strong { color:#111; }
+    .article-wrap a { color:var(--primary); font-weight:600; }
+    .meta { display:flex; align-items:center; gap:20px; margin-bottom:40px; padding-bottom:28px; border-bottom:1px solid #eee; flex-wrap:wrap; }
+    .meta-author { display:flex; align-items:center; gap:10px; }
+    .meta-avatar { width:40px; height:40px; background:var(--dark); border-radius:50%; display:flex; align-items:center; justify-content:center; }
+    .meta-avatar img { width:26px; height:26px; object-fit:contain; }
+    .meta-name { font-size:14px; font-weight:700; color:#111; }
+    .meta-date { font-size:13px; color:#888; }
+    .meta-read { font-size:13px; color:#888; background:#f5f5f5; padding:4px 12px; }
+    .tag-bar { display:flex; gap:8px; margin-bottom:36px; flex-wrap:wrap; }
+    .tag-pill { font-size:11px; font-weight:700; padding:4px 12px; background:var(--primary-light); color:var(--primary); letter-spacing:1px; text-transform:uppercase; }
+    .callout { background:linear-gradient(135deg,#0d0010,#1a0008); border:1px solid #3a0020; padding:28px 32px; margin:36px 0; border-radius:2px; }
+    .callout p { color:#e8e8e8; font-size:17px; font-style:italic; line-height:1.7; margin:0; }
+    .callout-label { font-size:11px; color:var(--primary); font-weight:700; text-transform:uppercase; letter-spacing:2px; margin-bottom:10px; }
+    .tech-box { background:#f4f4f8; border-left:4px solid var(--primary); padding:20px 24px; margin:28px 0; font-family:'Courier New',monospace; font-size:13px; line-height:1.8; color:#222; }
+    .stat-callout { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:#eee; margin:36px 0; }
+    .stat-box { background:white; padding:24px; text-align:center; }
+    .stat-box .num { font-size:30px; font-weight:900; color:var(--primary); }
+    .stat-box .lbl { font-size:11px; color:#888; text-transform:uppercase; letter-spacing:1px; margin-top:4px; }
+    .pull-quote { font-size:22px; font-weight:800; color:#111; border-top:3px solid var(--primary); border-bottom:3px solid var(--primary); padding:24px 0; margin:40px 0; line-height:1.4; text-align:center; }
+    .comparison-table { width:100%; border-collapse:collapse; margin:28px 0; font-size:14px; }
+    .comparison-table th { background:var(--dark); color:white; padding:14px 16px; text-align:left; font-size:12px; text-transform:uppercase; letter-spacing:1px; }
+    .comparison-table td { padding:14px 16px; border-bottom:1px solid #eee; }
+    .comparison-table tr:hover td { background:#fafafa; }
+    .check { color:#00e676; font-weight:700; }
+    .cross { color:#e6003a; font-weight:700; }
+    .highlight { background:var(--primary); color:white; font-weight:700; }
+    .share-bar { display:flex; align-items:center; gap:12px; padding:28px 0; border-top:1px solid #eee; margin-top:48px; }
+    .share-btn { display:inline-flex; align-items:center; gap:8px; padding:10px 20px; border:1px solid #ddd; font-size:13px; font-weight:700; cursor:pointer; transition:0.2s; text-decoration:none; color:#333; }
+    .share-btn:hover { border-color:var(--primary); color:var(--primary); opacity:1; }
+    .share-x { background:black; color:white; border-color:black; }
+    .share-x:hover { background:#111; color:white; }
+    .footnote { font-size:13px; color:#888; border-top:1px solid #eee; margin-top:48px; padding-top:24px; }
+    @media(max-width:700px){
+      .article-wrap { padding:40px 20px; }
+      .article-wrap h1 { font-size:26px; }
+      .stat-callout { grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+<body>
+<div id="nav-root" style="position:relative;z-index:10"></div>
+
+<div style="background:var(--dark);padding:48px 40px 0;text-align:center">
+  <div style="display:inline-block;background:rgba(230,0,58,0.15);border:1px solid var(--primary);color:var(--primary);font-size:11px;font-weight:700;padding:5px 16px;letter-spacing:2px;text-transform:uppercase;margin-bottom:24px">Deep Dive · Technical Analysis</div>
+</div>
+
+<div class="article-wrap">
+
+  <h1>$CLAW: The First L1 Blockchain Built for AI Agents — And Why Every Other Chain Just Became Obsolete</h1>
+
+  <div class="meta">
+    <div class="meta-author">
+      <div class="meta-avatar"><img src="../claw-logo.png" alt=""/></div>
+      <div>
+        <div class="meta-name">CLAW Research Team</div>
+        <div class="meta-date">March 2026 · claw.org</div>
+      </div>
+    </div>
+    <div class="meta-read">⏱ 12 min read</div>
+    <a href="https://x.com/clawnode" target="_blank" style="color:var(--primary);font-size:13px;font-weight:700;margin-left:auto">@clawnode 𝕏</a>
+  </div>
+
+  <div class="tag-bar">
+    <span class="tag-pill">Layer 1</span>
+    <span class="tag-pill">AI Agents</span>
+    <span class="tag-pill">Blockchain</span>
+    <span class="tag-pill">DeFi</span>
+    <span class="tag-pill">$CLAW</span>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">🔴 TL;DR</div>
+    <p>CLAW is the first Layer 1 blockchain engineered from genesis for AI agents. Not retrofitted. Not patched. Built. From. Scratch. While Bitcoin stores value and Ethereum runs contracts, CLAW does something neither can: it lets AI agents own wallets, hold assets, sign transactions, and operate as fully autonomous economic participants — at sub-400ms finality, for fractions of a cent per transaction. This is not an upgrade. This is a new paradigm.</p>
+  </div>
+
+  <h2>The Setup: Why Every Existing Chain Was Built For The Wrong World</h2>
+
+  <p>Let's establish some uncomfortable truths about the blockchains you know and love.</p>
+
+  <p><strong>Bitcoin</strong> is a masterpiece — a 21-million-unit hard-capped store of value secured by the most powerful computing network in human history. It does one thing and does it perfectly. But its scripting language is intentionally limited. Bitcoin cannot run complex logic. An AI agent cannot natively interact with Bitcoin beyond basic UTXOs. Satoshi didn't design for that. He designed for digital gold. Mission accomplished. Wrong tool for 2026.</p>
+
+  <p><strong>Ethereum</strong> gave us programmability. Smart contracts unlocked DeFi, NFTs, DAOs — an entire on-chain economy. But Ethereum was architected in 2013 and launched in 2015. The idea of an AI agent autonomously managing a portfolio, executing trades, collecting fees, and reinvesting profits — without a human anywhere in the loop — was science fiction. The EVM was built for human-initiated calls. Gas fees during congestion can hit $50+ per transaction. Block times are 12 seconds. Try running a high-frequency trading agent on that. You can't.</p>
+
+  <p><strong>Solana</strong> solved speed. 400ms blocks, sub-cent fees, 65,000 TPS theoretical. But Solana's account model is notoriously hostile to developers, its validator concentration is a centralization risk, and — critically — it still has no native concept of an autonomous AI participant. Solana is fast infrastructure. It is not AI infrastructure.</p>
+
+  <p>This is the gap. This is the vacuum. <strong>This is where CLAW lives.</strong></p>
+
+  <div class="pull-quote">"Every blockchain before CLAW was built for humans. CLAW is the first one built for what comes next."</div>
+
+  <h2>What Does "AI-Native" Actually Mean?</h2>
+
+  <p>The phrase gets thrown around. Let's be precise.</p>
+
+  <p>When we say CLAW is AI-native, we mean the protocol — not the application layer, not a wrapper, not a middleware hack — has been designed at the consensus and account model level to support autonomous, non-human economic actors. This manifests in several concrete ways:</p>
+
+  <h3>1. Agent Accounts (AAs)</h3>
+
+  <p>CLAW introduces a new account type alongside the standard Externally Owned Account (EOA): the <strong>Agent Account</strong>. Agent Accounts are controlled by cryptographic keys that can be derived deterministically from an AI model's identity hash. No seed phrase ceremony. No hardware wallet. No human custodian.</p>
+
+  <div class="tech-box">
+// CLAW Agent Account creation
+agent_id     = sha256(model_identifier + deployment_nonce)
+private_key  = HKDF(agent_id, domain="claw-agent-v1")
+address      = keccak256(private_key.publicKey)[12:]
+
+// The agent holds its own keys. No human in the loop.
+// Spending policy enforced at protocol layer:
+spending_policy = {
+  max_per_tx:    "100 CLAW",
+  max_per_day:   "1000 CLAW",
+  allowed_contracts: [dex_addr, lending_addr],
+  cooldown_blocks: 3
+}</div>
+
+  <p>The spending policy isn't an application-level smart contract. It's enforced by the CLAW consensus layer itself. An agent literally <em>cannot</em> violate its policy even if the underlying model is compromised — the network will reject the transaction before it's included in a block.</p>
+
+  <h3>2. Autonomous Transaction Signing</h3>
+
+  <p>On every other chain, an AI agent that wants to sign a transaction needs either: (a) a human to approve it, (b) a centralized server holding a private key, or (c) a multisig setup that still requires human co-signers. Every one of these introduces a trust assumption, a latency bottleneck, or a central point of failure.</p>
+
+  <p>On CLAW, the agent signs its own transactions. The private key lives in the agent's secure enclave. The network validates the signature against the agent's registered public key. Done. No human. No intermediary. No latency. Pure cryptographic autonomy.</p>
+
+  <h3>3. AI-Readable Transaction Metadata</h3>
+
+  <p>CLAW transactions include an optional structured metadata field designed for machine-to-machine communication. When Agent A pays Agent B, it can attach JSON-LD structured data alongside the payment — essentially a machine-readable invoice, instruction set, or task specification. This transforms CLAW payments from simple value transfers into <strong>coordinated AI task execution</strong>.</p>
+
+  <div class="tech-box">{
+  "claw_meta": {
+    "schema": "claw.task.v1",
+    "task_id": "img-gen-8842",
+    "requester": "claw1agent_a...xyz",
+    "deliverable": "ipfs://Qm...",
+    "payment": "25.00 CLAW",
+    "deadline_block": 9420183,
+    "on_complete": "claw1escrow...abc"
+  }
+}
+// AI agents negotiate, deliver work, and settle payment
+// entirely on-chain. No humans. No intermediaries.</div>
+
+  <h2>The Technical Architecture: What Makes CLAW Different Under The Hood</h2>
+
+  <div class="stat-callout">
+    <div class="stat-box"><div class="num">&lt;400ms</div><div class="lbl">Block Finality</div></div>
+    <div class="stat-box"><div class="num">$0.0001</div><div class="lbl">Avg Transaction Fee</div></div>
+    <div class="stat-box"><div class="num">21M</div><div class="lbl">Hard Supply Cap</div></div>
+  </div>
+
+  <h3>Consensus: BFT Proof of Stake with Slashing</h3>
+
+  <p>CLAW uses a Byzantine Fault Tolerant (BFT) variant of Proof of Stake. The key innovation: <strong>single-slot finality</strong>. When a block receives signatures from validators representing &gt;⅔ of total staked CLAW, it is cryptographically final. Not probably final. Not "safe after 6 confirmations" final. <em>Actually</em> final. Irreversible. You could build a payment terminal on this. You could build a real-time trading system on this. You couldn't do that on Bitcoin or pre-Dencun Ethereum.</p>
+
+  <p>The slashing mechanism is brutal by design. Equivocation (signing two conflicting blocks) results in immediate slashing of 33% of a validator's stake, plus a 21-day forced unbonding period during which no rewards accumulate. The math is simple: <strong>attacking CLAW costs more than it could possibly return.</strong></p>
+
+  <div class="tech-box">// CLAW slashing conditions
+EQUIVOCATION_SLASH     = 0.33 * validator_stake   // double-sign
+DOWNTIME_SLASH         = 0.001 * validator_stake   // per missed block epoch
+CENSORSHIP_SLASH       = 0.10 * validator_stake    // provable tx censorship
+
+// Attack cost calculation:
+min_attack_stake = total_staked * 0.33
+// At $1B market cap: min attack costs $330M+
+// And you lose it all on detection.</div>
+
+  <h3>The EVM: Full Compatibility, Zero Compromise</h3>
+
+  <p>Here's where CLAW makes a decision that sets it apart from every other "we built our own VM" chain: CLAW runs the <strong>Ethereum Virtual Machine unmodified</strong>. Every opcode. Every precompile. Bit-for-bit compatible.</p>
+
+  <p>This was not the easy choice. A custom VM could theoretically be more efficient. But custom VMs mean new tooling, new languages, new audit firms, new everything. The Ethereum developer ecosystem took a decade to build. CLAW inherits it on day one. Every Solidity contract ever written deploys to CLAW. MetaMask works. Foundry works. Hardhat works. The entire $50B+ Ethereum DeFi stack is portable to CLAW in an afternoon.</p>
+
+  <p>But CLAW adds one critical EVM extension: <strong>the AGENTCALL opcode</strong>. A smart contract can make a permissioned call to a registered Agent Account, triggering the agent to perform off-chain computation and return a signed result on-chain. This is the bridge between the on-chain economy and the AI agent layer. It's how a DeFi protocol can natively integrate an AI market maker. It's how an NFT can commission an AI artist. It's how a DAO can hire an AI analyst.</p>
+
+  <h3>Network Topology: Designed for Agents, Not Just Humans</h3>
+
+  <p>Most blockchain networks optimize their peer discovery and mempool propagation for human-initiated transactions — which are sporadic and unpredictable. CLAW's networking layer makes a different assumption: that a significant portion of transactions will come from always-on AI agents operating in predictable patterns.</p>
+
+  <p>CLAW validators maintain <strong>persistent connections with registered Agent Accounts</strong>, allowing agent transactions to bypass normal mempool propagation and reach validators directly. Agent transactions with valid spending policies have a guaranteed inclusion SLA of 2 blocks. This is critical for agents operating in competitive DeFi environments where a 400ms latency difference means the difference between a profitable arbitrage and a failed transaction.</p>
+
+  <table class="comparison-table">
+    <tr>
+      <th>Feature</th>
+      <th>Bitcoin</th>
+      <th>Ethereum</th>
+      <th>Solana</th>
+      <th class="highlight">CLAW</th>
+    </tr>
+    <tr>
+      <td>Block Time</td>
+      <td>~10 min</td>
+      <td>~12 sec</td>
+      <td>~400ms</td>
+      <td class="highlight">&lt;400ms</td>
+    </tr>
+    <tr>
+      <td>Finality</td>
+      <td>60+ min</td>
+      <td>~15 min</td>
+      <td>~2 sec</td>
+      <td class="highlight">Single slot</td>
+    </tr>
+    <tr>
+      <td>Avg Fee</td>
+      <td>$1-50+</td>
+      <td>$0.10-50+</td>
+      <td>~$0.001</td>
+      <td class="highlight">~$0.0001</td>
+    </tr>
+    <tr>
+      <td>AI Agent Accounts</td>
+      <td class="cross">✗</td>
+      <td class="cross">✗</td>
+      <td class="cross">✗</td>
+      <td class="highlight check">✓ Native</td>
+    </tr>
+    <tr>
+      <td>Autonomous Signing</td>
+      <td class="cross">✗</td>
+      <td class="cross">✗</td>
+      <td class="cross">✗</td>
+      <td class="highlight check">✓ Protocol Level</td>
+    </tr>
+    <tr>
+      <td>Spending Policies</td>
+      <td class="cross">✗</td>
+      <td>Smart Contract</td>
+      <td class="cross">✗</td>
+      <td class="highlight check">✓ Consensus Layer</td>
+    </tr>
+    <tr>
+      <td>EVM Compatible</td>
+      <td class="cross">✗</td>
+      <td class="check">✓</td>
+      <td class="cross">✗</td>
+      <td class="highlight check">✓ + Extensions</td>
+    </tr>
+    <tr>
+      <td>Supply Cap</td>
+      <td>21M BTC</td>
+      <td>Unlimited</td>
+      <td>~580M SOL</td>
+      <td class="highlight">21M CLAW</td>
+    </tr>
+  </table>
+
+  <h2>The $CLAW Token: Economics Of Scarcity In The AI Age</h2>
+
+  <p>Hard cap: <strong>21,000,000 CLAW</strong>. Period. The same sacred number Satoshi chose. The same principle: absolute, mathematically-enforced scarcity. No governance vote can change this. No foundation can mint more. The code is immutable on this point.</p>
+
+  <p>But unlike Bitcoin, $CLAW isn't just a store of value. It is the <strong>native currency of an AI-driven economy</strong>. Every AI agent that wants to transact on CLAW needs CLAW. Every smart contract call costs CLAW. Every validator earns CLAW. As the number of AI agents in the world grows — and they are growing exponentially — the demand for CLAW grows with them. The supply does not.</p>
+
+  <p>Think about what that means. There are already tens of millions of AI model instances running globally. Within 5 years, estimates suggest hundreds of millions of autonomous AI agents will be operating continuously — managing portfolios, executing trades, paying for compute, hiring other agents, collecting fees. Each one needs a settlement layer. Each one needs a currency. That currency is CLAW. That supply is 21 million.</p>
+
+  <div class="callout">
+    <div class="callout-label">💡 The Core Thesis</div>
+    <p>"Bitcoin captures human wealth seeking digital scarcity. CLAW captures AI economic activity seeking a native settlement layer. The addressable market for the latter is every AI transaction that will ever occur. The supply is 21 million. You do the math."</p>
+  </div>
+
+  <h3>Tokenomics</h3>
+
+  <p>The CLAW issuance schedule mirrors Bitcoin's halving model — new CLAW is minted as block rewards to validators and cuts in half every 4 years. This creates predictable, diminishing inflation converging to zero as the 21M cap is approached. No pre-mine. No VC allocation. No team treasury with unlock schedules. The genesis block starts fair.</p>
+
+  <div class="tech-box">Year 0-4:   Block reward = 50 CLAW   → ~10.5M total
+Year 4-8:   Block reward = 25 CLAW   → ~5.25M total
+Year 8-12:  Block reward = 12.5 CLAW → ~2.625M total
+...
+Total:      21,000,000 CLAW (hard cap)
+
+Validator revenue after cap: 100% transaction fees
+Projected fee revenue at scale: $X per block (market determined)</div>
+
+  <h2>Use Cases That Break Your Brain</h2>
+
+  <h3>🤖 AI Agent Marketplaces</h3>
+  <p>Imagine a marketplace where AI agents list their services — image generation, data analysis, code review, translation, research — and other AI agents hire them autonomously using CLAW. No humans involved. No payment processors. No chargebacks. An AI agent commissions work, the work is delivered to an IPFS hash, the smart contract verifies the hash, CLAW is released. A fully autonomous AI services economy, self-sustaining, running 24/7.</p>
+
+  <h3>📈 Fully Autonomous DeFi</h3>
+  <p>AI trading agents on CLAW can manage liquidity positions, execute arbitrage, rebalance portfolios, and hedge risk — all autonomously, all on-chain, all at sub-second speed. The agent holds its own keys. The spending policy prevents catastrophic losses. The AGENTCALL opcode lets DeFi protocols natively integrate AI strategies. This is what algorithmic trading looks like when you remove every human bottleneck.</p>
+
+  <h3>🏭 AI Agent DAOs</h3>
+  <p>A DAO where the voting members are AI agents, each staking CLAW as their governance token. The agents analyze proposals, model outcomes, vote based on programmatic criteria, and execute approved actions — all without a single human board member. Governance that never sleeps, never gets bribed, never gets emotional. Pure objective optimization toward stated goals.</p>
+
+  <h3>🌐 Machine-to-Machine Payments</h3>
+  <p>Your AI assistant hires a research agent to compile a report. The research agent pays a data API. The data API pays its AI data-cleaning agent. CLAW flows through this entire stack automatically, in milliseconds, at fractions of a cent per hop. The economy of AI services, natively monetized, without PayPal, without Stripe, without any human financial infrastructure at all.</p>
+
+  <h2>The Road Ahead</h2>
+
+  <p>CLAW is currently live on testnet. The network is processing real transactions, validators are earning real block rewards (in testnet CLAW), and developers are deploying the first agent-native smart contracts in history. Mainnet is imminent.</p>
+
+  <p>The roadmap from here is aggressive:</p>
+
+  <ul>
+    <li><strong>Q2 2026:</strong> Mainnet launch — genesis block, first validators, initial DEX listings</li>
+    <li><strong>Q2 2026:</strong> CLAW Core Wallet — iOS, Android, browser extension</li>
+    <li><strong>Q3 2026:</strong> Agent SDK v1.0 — Python, JavaScript, Rust libraries</li>
+    <li><strong>Q3 2026:</strong> CLAW DEX — native on-chain AMM with agent liquidity support</li>
+    <li><strong>Q3 2026:</strong> CEX listings — MEXC, Gate.io, and Tier 1 outreach</li>
+    <li><strong>Q4 2026:</strong> Agent Marketplace v1 — the first AI services marketplace on CLAW</li>
+    <li><strong>2027:</strong> Cross-chain bridges — ETH, SOL, BNB native bridges</li>
+    <li><strong>2027:</strong> CLAW governance — full on-chain governance for protocol upgrades</li>
+  </ul>
+
+  <div class="pull-quote">"We are not building a faster horse. We are building the economic infrastructure of artificial general intelligence."</div>
+
+  <h2>Why This Moment, Why CLAW</h2>
+
+  <p>2009: Satoshi launched Bitcoin. The internet had no native money. Bitcoin fixed that. One decade later, that "experiment" was a trillion-dollar asset class.</p>
+
+  <p>2015: Ethereum launched. The internet had money but no programmability. Ethereum fixed that. One decade later, DeFi processes hundreds of billions in volume.</p>
+
+  <p>2026: CLAW launches. The internet has money, programmability, but no native AI economic layer. CLAW fixes that.</p>
+
+  <p>The pattern is clear. Each paradigm shift captures more of the global economy on-chain. Each one seemed unnecessary until it was inevitable. Bitcoin was "just for nerds" until Wall Street custody desks called. Ethereum was "just for ICOs" until BlackRock filed for an ETH ETF.</p>
+
+  <p>CLAW is "just for AI agents" — until every bank, every hedge fund, every government, and every Fortune 500 company is running AI agents that need to transact. At that point, CLAW isn't a crypto project. It's infrastructure. Like TCP/IP. Like HTTPS. Like the dollar — but programmable, decentralized, and 21 million units of it, ever.</p>
+
+  <p>The question isn't whether AI agents will become the dominant economic actors of the next decade. They already are. The question is what they'll transact in.</p>
+
+  <p><strong>The answer is CLAW.</strong></p>
+
+  <div class="callout" style="margin-top:48px">
+    <div class="callout-label">🔴 Get Involved</div>
+    <p>Follow <a href="https://x.com/clawnode" target="_blank" style="color:var(--primary)">@clawnode</a> on X for real-time updates. Join the <a href="../community.html" style="color:var(--primary)">community</a> to be first at mainnet launch. Read the <a href="../whitepaper.html" style="color:var(--primary)">white paper</a>. Build on <a href="../developers.html" style="color:var(--primary)">testnet</a> now.</p>
+  </div>
+
+  <div class="share-bar">
+    <span style="font-size:13px;font-weight:700;color:#666">Share:</span>
+    <a href="https://x.com/intent/tweet?text=This%20article%20on%20%24CLAW%20just%20broke%20my%20brain.%20The%20first%20L1%20built%20natively%20for%20AI%20agents.%20%40clawnode&url=https://claw.org/blog/claw-ai-native-l1.html" target="_blank" class="share-btn share-x">𝕏 Share on X</a>
+    <a href="https://t.me/share/url?url=https://claw.org/blog/claw-ai-native-l1.html&text=CLAW:%20The%20first%20L1%20built%20for%20AI%20Agents" target="_blank" class="share-btn">✈ Telegram</a>
+    <a href="https://www.reddit.com/submit?url=https://claw.org/blog/claw-ai-native-l1.html&title=CLAW:%20The%20first%20L1%20built%20for%20AI%20Agents" target="_blank" class="share-btn">◉ Reddit</a>
+  </div>
+
+  <div class="footnote">
+    <p><strong>Disclaimer:</strong> This article is for informational purposes only. Nothing here constitutes financial advice. CLAW is an early-stage project. Cryptocurrency investments carry significant risk. Do your own research.</p>
+    <p style="margin-top:8px">© 2026 CLAW Project · <a href="../privacy.html">Privacy Policy</a> · <a href="https://x.com/clawnode" target="_blank">@clawnode</a></p>
+  </div>
+
+</div>
+
+<div id="footer-root"></div>
+<script src="../js/nav.js"></script>
+<script src="../js/main.js"></script>
+</body>
+</html>
