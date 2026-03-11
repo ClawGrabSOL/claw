@@ -356,78 +356,89 @@ let wins = 0;
 let losses = 0;
 let bpmInterval = null;
 
+const WSOL = 'So11111111111111111111111111111111111111112';
+
 // ===================== HELIUS API =====================
 async function fetchTransactions(wallet, before = null) {
-  let url = `https://api.helius.xyz/v0/addresses/${wallet}/transactions?api-key=${HELIUS_KEY}&limit=20&type=SWAP`;
+  let url = `https://api.helius.xyz/v0/addresses/${wallet}/transactions?api-key=${HELIUS_KEY}&limit=25`;
   if (before) url += `&before=${before}`;
   const res = await fetch(url);
-  if (!res.ok) throw new Error(`Helius error: ${res.status}`);
+  if (!res.ok) throw new Error(`Helius ${res.status}: check API key`);
   return res.json();
 }
 
 // ===================== DEXSCREENER PRICE =====================
+const priceCache = {};
 async function getTokenPrice(mintAddress) {
+  if (priceCache[mintAddress] && Date.now() - priceCache[mintAddress].ts < 30000) {
+    return priceCache[mintAddress].data;
+  }
   try {
     const res = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${mintAddress}`);
     const data = await res.json();
     if (data.pairs && data.pairs.length > 0) {
       const pair = data.pairs.sort((a,b) => (b.liquidity?.usd||0) - (a.liquidity?.usd||0))[0];
-      return {
+      const result = {
         price: parseFloat(pair.priceUsd || 0),
-        symbol: pair.baseToken?.symbol || '???',
-        name: pair.baseToken?.name || 'Unknown',
+        symbol: pair.baseToken?.symbol || mintAddress.slice(0,6),
+        name: pair.baseToken?.name || 'Unknown Token',
         priceChange24h: pair.priceChange?.h24 || 0,
         liquidity: pair.liquidity?.usd || 0,
         volume24h: pair.volume?.h24 || 0,
+        marketCap: pair.marketCap || 0,
         dexUrl: pair.url || `https://dexscreener.com/solana/${mintAddress}`
       };
+      priceCache[mintAddress] = { data: result, ts: Date.now() };
+      return result;
     }
     return null;
-  } catch(e) {
-    return null;
-  }
+  } catch(e) { return null; }
 }
 
-// ===================== PARSE SWAP =====================
+// ===================== PARSE SWAP (using tokenTransfers + accountData) =====================
 function parseSwap(tx) {
   try {
-    const events = tx.events?.swap;
-    if (!events) return null;
+    // Only process SWAP type transactions
+    if (tx.type !== 'SWAP') return null;
 
-    const nativeInput = events.nativeInput;
-    const nativeOutput = events.nativeOutput;
-    const tokenInputs = events.tokenInputs || [];
-    const tokenOutputs = events.tokenOutputs || [];
+    const transfers = tx.tokenTransfers || [];
+    const accountData = tx.accountData || [];
 
-    let side = null, token = null, amountSol = 0, tokenAmount = 0, tokenMint = null;
+    // Get wallet's SOL balance change
+    const walletData = accountData.find(a => a.account === WALLET);
+    const solChange = walletData ? walletData.nativeBalanceChange / 1e9 : 0;
 
-    // BUY: SOL in, token out
-    if (nativeInput && tokenOutputs.length > 0) {
+    // Tokens received by wallet (not WSOL)
+    const tokensIn = transfers.filter(t =>
+      t.toUserAccount === WALLET && t.mint !== WSOL && t.tokenAmount > 0
+    );
+
+    // Tokens sent from wallet (not WSOL)
+    const tokensOut = transfers.filter(t =>
+      t.fromUserAccount === WALLET && t.mint !== WSOL && t.tokenAmount > 0
+    );
+
+    let side, tokenMint, tokenAmount, amountSol;
+
+    if (tokensIn.length > 0) {
+      // BUY — wallet received token
       side = 'buy';
-      amountSol = nativeInput.amount / 1e9;
-      const tok = tokenOutputs[0];
+      const tok = tokensIn[0];
       tokenMint = tok.mint;
-      tokenAmount = tok.amount / Math.pow(10, tok.decimals || 6);
-    }
-    // SELL: token in, SOL out
-    else if (nativeOutput && tokenInputs.length > 0) {
+      tokenAmount = tok.tokenAmount;
+      amountSol = solChange < 0 ? Math.abs(solChange) : 0;
+    } else if (tokensOut.length > 0 && solChange > 0) {
+      // SELL — wallet sent token, received SOL
       side = 'sell';
-      amountSol = nativeOutput.amount / 1e9;
-      const tok = tokenInputs[0];
+      const tok = tokensOut[0];
       tokenMint = tok.mint;
-      tokenAmount = tok.amount / Math.pow(10, tok.decimals || 6);
-    }
-    // Token to Token
-    else if (tokenInputs.length > 0 && tokenOutputs.length > 0) {
-      side = 'buy';
-      const tokIn = tokenInputs[0];
-      const tokOut = tokenOutputs[0];
-      tokenMint = tokOut.mint;
-      tokenAmount = tokOut.amount / Math.pow(10, tokOut.decimals || 6);
-      amountSol = 0;
+      tokenAmount = tok.tokenAmount;
+      amountSol = solChange;
+    } else {
+      return null;
     }
 
-    if (!side || !tokenMint) return null;
+    if (!tokenMint || tokenAmount <= 0) return null;
 
     return {
       signature: tx.signature,
@@ -439,6 +450,7 @@ function parseSwap(tx) {
       entryPrice: amountSol > 0 && tokenAmount > 0 ? amountSol / tokenAmount : 0,
     };
   } catch(e) {
+    console.warn('Parse error:', e);
     return null;
   }
 }
@@ -525,8 +537,10 @@ async function poll() {
       return;
     }
 
+    // Find only txs newer than what we've seen
+    const knownSigs = new Set(trades.map(t => t.signature));
     const newTxs = lastSignature
-      ? txs.filter(tx => tx.signature !== lastSignature)
+      ? txs.filter(tx => !knownSigs.has(tx.signature))
       : txs;
 
     if (newTxs.length > 0) {
@@ -674,7 +688,7 @@ async function startTracking() {
 
   tracking = true;
   await poll();
-  pollInterval = setInterval(poll, 15000); // refresh every 15s
+  pollInterval = setInterval(poll, 8000); // refresh every 8s
   startBpm();
 
   btn.textContent = '✅ TRACKING';
