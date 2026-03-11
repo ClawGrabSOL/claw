@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>CLAW - AI-Native Peer-to-Peer Money</title>
+  <meta name="description" content="CLAW is an innovative AI-native payment network and a new kind of money. Open source, decentralized, built for the future."/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <script src="js/head-inject.js" defer></script>
+  <style>
+    .ticker-bar { background:#0d0d14; border-bottom:1px solid #1e1e2a; padding:10px 40px; display:flex; align-items:center; gap:40px; font-size:13px; overflow-x:auto; }
+    .t-item { display:flex; align-items:center; gap:10px; white-space:nowrap; }
+    .t-name { color:#555; font-size:11px; text-transform:uppercase; letter-spacing:1px; }
+    .t-price { color:white; font-weight:700; font-size:15px; }
+    .t-badge { background:var(--primary-light); color:var(--primary); font-size:11px; font-weight:700; padding:2px 8px; border-radius:2px; letter-spacing:1px; }
+    .hero-badge { display:inline-block; background:var(--primary-light); color:var(--primary); font-size:12px; font-weight:700; padding:5px 14px; letter-spacing:2px; text-transform:uppercase; margin-bottom:20px; }
+    .down-arrow-wrap { text-align:center; padding:20px 0; color:white; font-size:22px; background:var(--dark2); }
+  </style>
+</head>
+<body>
+
+<div id="nav-root"></div>
+
+<!-- TICKER -->
+<div class="ticker-bar">
+  <div class="t-item">
+    <span class="t-name">CLAW</span>
+    <span class="t-price" id="clawPrice">—</span>
+    <span class="t-badge">LAUNCHING SOON</span>
+  </div>
+  <div class="t-item">
+    <span class="t-name">Network</span>
+    <span style="color:#00e676;font-weight:600">● Testnet Live</span>
+  </div>
+  <div class="t-item">
+    <span class="t-name">Validators</span>
+    <span style="color:white;font-weight:600">12 active</span>
+  </div>
+  <div class="t-item">
+    <span class="t-name">Block Time</span>
+    <span style="color:white;font-weight:600">~400ms</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero-home">
+  <div class="hero-badge">🔴 The World's First AI-Agent Currency</div>
+  <h1>CLAW is the first cryptocurrency built to be used by AI Agents.</h1>
+  <p>The AI-native peer-to-peer payment network. Open source, decentralized, and designed from genesis for humans <em>and</em> the AI agents that work alongside them.</p>
+  <div class="hero-buttons">
+    <a href="getting-started.html" class="btn btn-primary">Get started with CLAW</a>
+    <a href="wallets.html" class="btn btn-outline">Choose your wallet</a>
+    <a href="buy.html" class="btn btn-outline">Buy CLAW</a>
+  </div>
+  <a href="how-it-works.html" class="video-link">
+    <div class="play-btn"></div>
+    What is CLAW?
+  </a>
+</section>
+
+<!-- AI AGENTS BANNER -->
+<div style="background:linear-gradient(135deg,#0d0010 0%,#1a0008 50%,#0a0a0f 100%);padding:56px 40px;text-align:center;border-top:1px solid #2a0015;border-bottom:1px solid #2a0015">
+  <div style="max-width:860px;margin:0 auto">
+    <div style="display:inline-block;background:rgba(230,0,58,0.15);border:1px solid var(--primary);color:var(--primary);font-size:11px;font-weight:700;padding:4px 14px;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px">Historic First</div>
+    <h2 style="color:white;font-size:32px;font-weight:800;margin-bottom:16px;line-height:1.25">The first cryptocurrency designed to be held, spent, and traded by <span style="color:var(--primary)">AI Agents</span></h2>
+    <p style="color:#aaa;font-size:16px;max-width:640px;margin:0 auto 36px;line-height:1.7">AI agents can own CLAW wallets, sign transactions, and participate in the economy autonomously — without a human co-signing every move. CLAW is the native currency of the AI economy.</p>
+    <div style="display:flex;justify-content:center;gap:40px;flex-wrap:wrap">
+      <div style="text-align:center">
+        <div style="font-size:28px;font-weight:800;color:white">Native</div>
+        <div style="font-size:12px;color:#666;text-transform:uppercase;letter-spacing:1px;margin-top:4px">AI Wallet Support</div>
+      </div>
+      <div style="width:1px;background:#2a2a3a"></div>
+      <div style="text-align:center">
+        <div style="font-size:28px;font-weight:800;color:white">Zero</div>
+        <div style="font-size:12px;color:#666;text-transform:uppercase;letter-spacing:1px;margin-top:4px">Human Co-signing Required</div>
+      </div>
+      <div style="width:1px;background:#2a2a3a"></div>
+      <div style="text-align:center">
+        <div style="font-size:28px;font-weight:800;color:white">&lt;400ms</div>
+        <div style="font-size:12px;color:#666;text-transform:uppercase;letter-spacing:1px;margin-top:4px">Agent Transaction Speed</div>
+      </div>
+    </div>
+    <br/><br/>
+    <a href="how-it-works.html#ai" class="btn btn-primary">How AI Agents Use CLAW →</a>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-row reveal">
+  <div class="stat-item">
+    <div class="stat-num">∞</div>
+    <div class="stat-label">Transactions Possible</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">&lt;0.001¢</div>
+    <div class="stat-label">Average Fee</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">400ms</div>
+    <div class="stat-label">Block Time</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">100%</div>
+    <div class="stat-label">Open Source</div>
+  </div>
+</div>
+
+<!-- NETWORK ANIMATION -->
+<div class="network-wrap">
+  <canvas id="netCanvas"></canvas>
+  <svg class="mountains-svg" viewBox="0 0 1440 160" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <polygon points="0,160 0,110 80,75 160,100 260,55 380,85 480,40 580,70 680,20 800,55 920,15 1040,50 1160,25 1280,60 1380,35 1440,50 1440,160" fill="#111118"/>
+    <polygon points="0,160 0,130 120,105 240,128 360,95 480,118 580,88 680,110 780,70 900,100 1000,75 1100,100 1200,80 1320,105 1440,90 1440,160" fill="#0d0d14" opacity="0.7"/>
+  </svg>
+</div>
+
+<!-- OVERVIEW -->
+<div class="overview-wrap">
+  <h2>Get a quick overview for</h2>
+  <div class="overview-cards">
+    <a href="getting-started.html#individuals" class="ov-card">
+      <div class="ov-icon">👤</div>
+      <h3>Individuals</h3>
+      <span>Learn more →</span>
+    </a>
+    <a href="getting-started.html#businesses" class="ov-card">
+      <div class="ov-icon">🏢</div>
+      <h3>Businesses</h3>
+      <span>Learn more →</span>
+    </a>
+    <a href="developers.html" class="ov-card">
+      <div class="ov-icon">💻</div>
+      <h3>Developers</h3>
+      <span>Learn more →</span>
+    </a>
+  </div>
+  <div class="down-arrow-wrap">↓</div>
+</div>
+
+<!-- FEATURES -->
+<div class="features-wrap">
+  <div class="features-text reveal">
+    <h2>Get started with CLAW</h2>
+    <p>CLAW uses peer-to-peer technology to operate with no central authority or banks; managing transactions and the issuance of CLAW is carried out collectively by the network.</p>
+    <p><strong>CLAW is open-source; its design is public, nobody owns or controls CLAW and <a href="community.html">everyone can take part</a>.</strong> Through many of its unique properties, CLAW allows exciting uses that could not be covered by any previous payment system.</p>
+    <ul class="feature-list">
+      <li><div class="fi">⚡</div> Fast peer-to-peer transactions</li>
+      <li><div class="fi">🌍</div> Worldwide payments</li>
+      <li><div class="fi">💸</div> Ultra-low processing fees</li>
+      <li><div class="fi">🤖</div> Native AI agent support</li>
+      <li><div class="fi">🔒</div> Trustless & censorship-resistant</li>
+    </ul>
+    <a href="getting-started.html" class="btn btn-dark">Get started with CLAW</a>
+  </div>
+  <div class="features-visual reveal">
+    <div style="position:relative">
+      <div class="coin-glow">
+        <img src="claw-logo.png" alt="CLAW" class="coin-img"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NEWSLETTER -->
+<div style="background:#f7f7f9;padding:60px 40px;text-align:center;" class="reveal">
+  <div style="max-width:520px;margin:0 auto;">
+    <p class="section-label">Stay Updated</p>
+    <h2 class="section-title">Be first when CLAW launches</h2>
+    <p style="color:#666;margin-bottom:28px;">Get notified about mainnet launch, exchange listings, and major updates.</p>
+    <form id="signupForm" style="display:flex;gap:10px;max-width:420px;margin:0 auto;">
+      <input type="email" placeholder="your@email.com" required
+        style="flex:1;padding:13px 16px;border:1px solid #ddd;font-size:14px;outline:none;"/>
+      <button type="submit" class="btn btn-primary">Notify Me</button>
+    </form>
+  </div>
+</div>
+
+<div id="footer-root"></div>
+<script src="js/nav.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

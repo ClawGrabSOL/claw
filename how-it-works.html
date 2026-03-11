@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>How It Works - CLAW</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <script src="js/head-inject.js" defer></script>
+</head>
+<body>
+<div id="nav-root"></div>
+<div class="page-hero">
+  <h1>How CLAW Works</h1>
+  <p>A technical and non-technical overview of the CLAW network.</p>
+</div>
+
+<section class="section">
+  <div class="section-narrow">
+    <p class="section-label">The basics</p>
+    <h2 class="section-title">Peer-to-Peer Electronic Cash</h2>
+    <p style="font-size:16px;color:#555;line-height:1.8;margin-bottom:24px">
+      CLAW is a decentralized digital currency that enables instant, low-cost payments between any two parties anywhere in the world — without banks, payment processors, or intermediaries.
+    </p>
+    <p style="font-size:16px;color:#555;line-height:1.8;margin-bottom:40px">
+      Every transaction is verified by a distributed network of validators and permanently recorded on the CLAW blockchain — a public, tamper-proof ledger that anyone can inspect.
+    </p>
+
+    <div style="background:#f7f7f9;padding:32px;margin-bottom:40px;border-left:4px solid var(--primary)" class="reveal">
+      <h3 style="margin-bottom:12px">A simple transaction</h3>
+      <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;font-size:14px;color:#444">
+        <div style="text-align:center;padding:16px 24px;background:white;border:1px solid #ddd">
+          <div style="font-size:24px">👤</div><div style="margin-top:6px;font-weight:600">Alice</div>
+          <div style="font-size:12px;color:#888">wants to send</div>
+          <div style="color:var(--primary);font-weight:700">10 CLAW</div>
+        </div>
+        <div style="font-size:28px;color:var(--primary)">→</div>
+        <div style="text-align:center;padding:16px 24px;background:white;border:1px solid #ddd">
+          <div style="font-size:24px">🌐</div><div style="margin-top:6px;font-weight:600">Network</div>
+          <div style="font-size:12px;color:#888">validates in</div>
+          <div style="color:var(--primary);font-weight:700">&lt;1 second</div>
+        </div>
+        <div style="font-size:28px;color:var(--primary)">→</div>
+        <div style="text-align:center;padding:16px 24px;background:white;border:1px solid #ddd">
+          <div style="font-size:24px">👤</div><div style="margin-top:6px;font-weight:600">Bob</div>
+          <div style="font-size:12px;color:#888">receives</div>
+          <div style="color:var(--primary);font-weight:700">10 CLAW</div>
+        </div>
+      </div>
+      <p style="font-size:13px;color:#888;margin-top:16px">Fee: &lt;$0.001 · No bank required · Irreversible</p>
+    </div>
+
+    <h2 class="section-title reveal">The Blockchain</h2>
+    <p style="font-size:16px;color:#555;line-height:1.8;margin-bottom:24px">
+      The CLAW blockchain is a chain of blocks, each containing a batch of validated transactions. Once a block is added, it cannot be changed without redoing all the work that came after it — making the ledger effectively immutable.
+    </p>
+    <p style="font-size:16px;color:#555;line-height:1.8;margin-bottom:40px">
+      Validators — individuals and organizations who stake CLAW — compete to produce blocks and earn transaction fees as a reward. The more validators, the more secure the network.
+    </p>
+
+    <h2 class="section-title reveal">What Makes CLAW Different</h2>
+    <div class="grid-2" style="margin-top:24px">
+      <div class="card reveal">
+        <div class="card-icon">🤖</div>
+        <h3>AI-Native Design</h3>
+        <p>CLAW is the first blockchain designed from genesis for AI agents. Agents can hold wallets, sign transactions, and interact with smart contracts natively — no human co-signing required.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">⚡</div>
+        <h3>Sub-Second Finality</h3>
+        <p>Transactions reach finality in under 400ms. Not "fast enough" — actually fast. Built for real-time payments, not batch processing.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">💰</div>
+        <h3>Near-Zero Fees</h3>
+        <p>Average transaction cost is a fraction of a cent. Send $1 or $1,000,000 — the fee is the same. No percentage-based cuts.</p>
+      </div>
+      <div class="card reveal">
+        <div class="card-icon">🔗</div>
+        <h3>EVM Compatible</h3>
+        <p>Deploy existing Solidity smart contracts directly. Existing Ethereum tooling (Hardhat, Foundry, MetaMask) works out of the box.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+<script src="js/nav.js"></script><script src="js/main.js"></script>
+</body>
+</html>

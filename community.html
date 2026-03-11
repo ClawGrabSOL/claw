@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Community - CLAW</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <script src="js/head-inject.js" defer></script>
+  <style>
+    .community-card { border:1px solid var(--border); padding:32px; text-align:center; transition:0.2s; text-decoration:none; display:block; color:inherit; }
+    .community-card:hover { border-color:var(--primary); transform:translateY(-3px); box-shadow:0 8px 24px rgba(230,0,58,0.08); opacity:1; }
+    .comm-icon { font-size:44px; margin-bottom:16px; }
+    .comm-count { font-size:28px; font-weight:800; color:var(--primary); margin-bottom:4px; }
+    .comm-label { font-size:13px; color:#888; text-transform:uppercase; letter-spacing:1px; margin-bottom:12px; }
+    .comm-desc { font-size:14px; color:#666; line-height:1.6; margin-bottom:20px; }
+    .comm-btn { display:inline-block; padding:10px 24px; background:var(--primary); color:white; font-size:13px; font-weight:700; letter-spacing:1px; }
+  </style>
+</head>
+<body>
+<div id="nav-root"></div>
+<div class="page-hero">
+  <h1>CLAW Community</h1>
+  <p>Join thousands of builders, validators, traders, and believers shaping the future of money.</p>
+</div>
+
+<section class="section">
+  <div class="section-wide">
+    <div style="text-align:center;margin-bottom:48px">
+      <p class="section-label">Join the conversation</p>
+      <h2 class="section-title">Find your community</h2>
+    </div>
+    <div class="grid-3">
+      <a href="https://x.com/clawnode" target="_blank" class="community-card reveal" style="border-color:var(--primary)">
+        <div class="comm-icon">𝕏</div>
+        <div style="font-size:20px;font-weight:800;color:var(--primary);margin-bottom:2px">@clawnode</div>
+        <div class="comm-count" style="font-size:20px">Official X</div>
+        <div class="comm-label">Follow Us</div>
+        <div class="comm-desc">Latest news, updates, and announcements straight from the CLAW team. The fastest way to stay in the loop.</div>
+        <div class="comm-btn">Follow @clawnode →</div>
+      </a>
+      <a href="#" class="community-card reveal">
+        <div class="comm-icon">✈️</div>
+        <div class="comm-count">—</div>
+        <div class="comm-label">Members</div>
+        <div class="comm-desc">The main community hub. Get support, meet validators, and discuss everything CLAW.</div>
+        <div class="comm-btn">Join Telegram →</div>
+      </a>
+      <a href="#" class="community-card reveal">
+        <div class="comm-icon">🎮</div>
+        <div class="comm-count">—</div>
+        <div class="comm-label">Members</div>
+        <div class="comm-desc">Developer channels, governance discussions, validator coordination, and more.</div>
+        <div class="comm-btn">Join Discord →</div>
+      </a>
+      <a href="#" class="community-card reveal">
+        <div class="comm-icon">🔴</div>
+        <div class="comm-count">—</div>
+        <div class="comm-label">Members</div>
+        <div class="comm-desc">Community discussions, memes, price talk, and project news on Reddit.</div>
+        <div class="comm-btn">r/CLAWcrypto →</div>
+      </a>
+      <a href="#" class="community-card reveal">
+        <div class="comm-icon">⌥</div>
+        <div class="comm-count">Open Source</div>
+        <div class="comm-label">GitHub</div>
+        <div class="comm-desc">Read the code, open issues, submit PRs, and help build the protocol.</div>
+        <div class="comm-btn">View on GitHub →</div>
+      </a>
+      <a href="#" class="community-card reveal">
+        <div class="comm-icon">📝</div>
+        <div class="comm-count">Blog</div>
+        <div class="comm-label">Medium</div>
+        <div class="comm-desc">Deep dives, technical articles, and ecosystem updates from the core team.</div>
+        <div class="comm-btn">Read Blog →</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section dark-section">
+  <div style="max-width:600px;margin:0 auto;text-align:center">
+    <p class="section-label" style="color:var(--primary)">Early Access</p>
+    <h2 style="color:white;font-size:28px;margin-bottom:16px">Get notified at mainnet launch</h2>
+    <p style="color:#aaa;margin-bottom:32px">Be among the first to hold, trade, and use CLAW when we go live.</p>
+    <form id="signupForm" style="display:flex;gap:10px;max-width:420px;margin:0 auto;">
+      <input type="email" placeholder="your@email.com" required style="flex:1;padding:13px 16px;border:1px solid #333;background:#1a1a24;color:white;font-size:14px;outline:none;"/>
+      <button type="submit" class="btn btn-primary">Join Waitlist</button>
+    </form>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+<script src="js/nav.js"></script><script src="js/main.js"></script>
+</body>
+</html>

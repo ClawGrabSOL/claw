@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Buy CLAW</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <script src="js/head-inject.js" defer></script>
+  <style>
+    .exchange-card { display:flex; align-items:center; gap:20px; border:1px solid var(--border); padding:24px; margin-bottom:12px; transition:0.2s; }
+    .exchange-card:hover { border-color:var(--primary); }
+    .ex-logo { width:52px; height:52px; background:var(--dark); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:26px; flex-shrink:0; }
+    .ex-info { flex:1; }
+    .ex-info h3 { font-size:16px; font-weight:700; margin-bottom:4px; }
+    .ex-info p { font-size:13px; color:#666; }
+    .ex-tags { display:flex; gap:6px; margin-top:8px; flex-wrap:wrap; }
+    .tag { font-size:11px; padding:2px 8px; border:1px solid #ddd; color:#555; font-weight:600; }
+    .tag-primary { border-color:var(--primary); color:var(--primary); }
+    .soon { background:#1a1a24; color:#555; font-size:12px; padding:8px 16px; font-weight:600; letter-spacing:1px; }
+  </style>
+</head>
+<body>
+<div id="nav-root"></div>
+<div class="page-hero">
+  <h1>Buy CLAW</h1>
+  <p>Get CLAW through trusted exchanges and platforms. Always verify you're using official sources.</p>
+</div>
+
+<section class="section">
+  <div class="section-wide">
+    <div style="background:var(--primary-light);border-left:4px solid var(--primary);padding:20px 24px;margin-bottom:48px;font-size:14px;color:#333">
+      ⚠️ <strong>CLAW mainnet is launching soon.</strong> Exchange listings will go live at launch. <a href="community.html">Join the community</a> to be notified the moment you can buy.
+    </div>
+
+    <p class="section-label">Decentralized Exchanges</p>
+    <h2 class="section-title" style="margin-bottom:24px">DEX Listings (at launch)</h2>
+
+    <div class="exchange-card reveal">
+      <div class="ex-logo">🦄</div>
+      <div class="ex-info">
+        <h3>Uniswap v3</h3>
+        <p>Trade CLAW permissionlessly on Ethereum's leading DEX.</p>
+        <div class="ex-tags"><span class="tag tag-primary">DEX</span><span class="tag">EVM</span><span class="tag">No KYC</span></div>
+      </div>
+      <span class="soon">AT LAUNCH</span>
+    </div>
+    <div class="exchange-card reveal">
+      <div class="ex-logo">🌊</div>
+      <div class="ex-info">
+        <h3>Raydium</h3>
+        <p>Trade CLAW on Solana's leading AMM with deep liquidity pools.</p>
+        <div class="ex-tags"><span class="tag tag-primary">DEX</span><span class="tag">Solana</span><span class="tag">No KYC</span></div>
+      </div>
+      <span class="soon">AT LAUNCH</span>
+    </div>
+
+    <br/>
+    <p class="section-label">Centralized Exchanges</p>
+    <h2 class="section-title" style="margin-bottom:24px">CEX Listings (roadmap)</h2>
+
+    <div class="exchange-card reveal">
+      <div class="ex-logo">🔵</div>
+      <div class="ex-info">
+        <h3>MEXC Global</h3>
+        <p>One of the largest CEXes — typically among the first to list new projects.</p>
+        <div class="ex-tags"><span class="tag">CEX</span><span class="tag">KYC Required</span><span class="tag">Fiat On-ramp</span></div>
+      </div>
+      <span class="soon">ROADMAP Q2</span>
+    </div>
+    <div class="exchange-card reveal">
+      <div class="ex-logo">🟠</div>
+      <div class="ex-info">
+        <h3>Gate.io</h3>
+        <p>Global exchange with 1400+ trading pairs and fiat support.</p>
+        <div class="ex-tags"><span class="tag">CEX</span><span class="tag">KYC Required</span><span class="tag">Fiat On-ramp</span></div>
+      </div>
+      <span class="soon">ROADMAP Q2</span>
+    </div>
+    <div class="exchange-card reveal">
+      <div class="ex-logo">🟡</div>
+      <div class="ex-info">
+        <h3>Binance</h3>
+        <p>The world's largest crypto exchange. CLAW listing application in progress.</p>
+        <div class="ex-tags"><span class="tag">CEX</span><span class="tag">KYC Required</span><span class="tag">High Liquidity</span></div>
+      </div>
+      <span class="soon">TBD</span>
+    </div>
+  </div>
+</section>
+
+<section style="background:#f7f7f9;padding:60px 40px;text-align:center">
+  <div style="max-width:520px;margin:0 auto">
+    <p class="section-label">Don't miss it</p>
+    <h2 class="section-title">Get notified at launch</h2>
+    <p style="color:#666;margin-bottom:28px">We'll email you the moment CLAW is available to buy.</p>
+    <form id="signupForm" style="display:flex;gap:10px;max-width:420px;margin:0 auto;">
+      <input type="email" placeholder="your@email.com" required style="flex:1;padding:13px 16px;border:1px solid #ddd;font-size:14px;outline:none;"/>
+      <button type="submit" class="btn btn-primary">Notify Me</button>
+    </form>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+<script src="js/nav.js"></script><script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Wallets - CLAW</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <script src="js/head-inject.js" defer></script>
+  <style>
+    .wallet-filter { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:36px; }
+    .filter-btn { padding:8px 18px; border:1px solid #ddd; background:white; font-size:13px; cursor:pointer; font-weight:600; transition:0.2s; }
+    .filter-btn.active, .filter-btn:hover { background:var(--primary); color:white; border-color:var(--primary); }
+    .wallet-card { display:flex; align-items:center; gap:20px; border:1px solid var(--border); padding:24px; margin-bottom:12px; transition:0.2s; }
+    .wallet-card:hover { border-color:var(--primary); box-shadow:0 4px 16px rgba(230,0,58,0.07); }
+    .wallet-icon { width:52px; height:52px; background:var(--dark); border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:28px; flex-shrink:0; }
+    .wallet-info { flex:1; }
+    .wallet-info h3 { font-size:16px; font-weight:700; margin-bottom:4px; }
+    .wallet-info p { font-size:13px; color:#666; }
+    .wallet-tags { display:flex; gap:6px; margin-top:8px; flex-wrap:wrap; }
+    .tag { font-size:11px; padding:2px 8px; border:1px solid #ddd; color:#555; font-weight:600; letter-spacing:0.5px; }
+    .tag-primary { border-color:var(--primary); color:var(--primary); }
+    .wallet-action { flex-shrink:0; }
+    .coming-soon-badge { background:#1a1a24; color:#666; font-size:12px; padding:8px 16px; font-weight:600; letter-spacing:1px; }
+  </style>
+</head>
+<body>
+<div id="nav-root"></div>
+<div class="page-hero">
+  <h1>CLAW Wallets</h1>
+  <p>Choose a wallet that fits your needs. Your wallet lets you store, send, and receive CLAW.</p>
+</div>
+
+<section class="section">
+  <div class="section-wide">
+    <div style="background:var(--primary-light);border-left:4px solid var(--primary);padding:20px 24px;margin-bottom:48px;font-size:14px;color:#333">
+      ⚠️ <strong>Mainnet launching soon.</strong> Wallets listed below are in development and will support CLAW at mainnet launch. Join the <a href="community.html">community</a> to be notified.
+    </div>
+
+    <div class="wallet-filter">
+      <button class="filter-btn active" onclick="filterWallets('all', this)">All</button>
+      <button class="filter-btn" onclick="filterWallets('mobile', this)">Mobile</button>
+      <button class="filter-btn" onclick="filterWallets('desktop', this)">Desktop</button>
+      <button class="filter-btn" onclick="filterWallets('web', this)">Web / Browser</button>
+      <button class="filter-btn" onclick="filterWallets('hardware', this)">Hardware</button>
+    </div>
+
+    <div id="walletList">
+      <div class="wallet-card reveal" data-type="mobile desktop">
+        <div class="wallet-icon">⚡</div>
+        <div class="wallet-info">
+          <h3>CLAW Core Wallet</h3>
+          <p>The official CLAW wallet. Full node support, maximum security, built by the CLAW team.</p>
+          <div class="wallet-tags">
+            <span class="tag tag-primary">Official</span>
+            <span class="tag">Open Source</span>
+            <span class="tag">Mobile</span>
+            <span class="tag">Desktop</span>
+          </div>
+        </div>
+        <div class="wallet-action">
+          <span class="coming-soon-badge">COMING SOON</span>
+        </div>
+      </div>
+      <div class="wallet-card reveal" data-type="web">
+        <div class="wallet-icon">🌐</div>
+        <div class="wallet-info">
+          <h3>ClawWallet Web</h3>
+          <p>Browser-based wallet. No install required. Connect to any CLAW-compatible dApp.</p>
+          <div class="wallet-tags">
+            <span class="tag">Web Extension</span>
+            <span class="tag">dApp Compatible</span>
+            <span class="tag">EVM</span>
+          </div>
+        </div>
+        <div class="wallet-action"><span class="coming-soon-badge">COMING SOON</span></div>
+      </div>
+      <div class="wallet-card reveal" data-type="mobile">
+        <div class="wallet-icon">📱</div>
+        <div class="wallet-info">
+          <h3>ClawMobile</h3>
+          <p>iOS and Android wallet. QR code payments, biometric security, and real-time notifications.</p>
+          <div class="wallet-tags">
+            <span class="tag">iOS</span>
+            <span class="tag">Android</span>
+            <span class="tag">QR Payments</span>
+          </div>
+        </div>
+        <div class="wallet-action"><span class="coming-soon-badge">COMING SOON</span></div>
+      </div>
+      <div class="wallet-card reveal" data-type="hardware">
+        <div class="wallet-icon">🔐</div>
+        <div class="wallet-info">
+          <h3>Ledger / Trezor Support</h3>
+          <p>Store CLAW on a hardware wallet for maximum cold storage security. Integration in progress.</p>
+          <div class="wallet-tags">
+            <span class="tag">Cold Storage</span>
+            <span class="tag">Ledger</span>
+            <span class="tag">Trezor</span>
+          </div>
+        </div>
+        <div class="wallet-action"><span class="coming-soon-badge">IN PROGRESS</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section dark-section">
+  <div style="text-align:center;max-width:600px;margin:0 auto">
+    <h2 style="color:white;font-size:26px;margin-bottom:12px">Building a wallet?</h2>
+    <p style="color:#aaa;margin-bottom:28px">We provide an SDK, RPC documentation, and developer support for wallet integrations.</p>
+    <a href="developers.html" class="btn btn-white">View Developer Docs</a>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+<script src="js/nav.js"></script><script src="js/main.js"></script>
+<script>
+function filterWallets(type, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.wallet-card').forEach(card => {
+    if (type === 'all' || card.dataset.type.includes(type)) {
+      card.style.display = 'flex';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+</script>
+</body>
+</html>

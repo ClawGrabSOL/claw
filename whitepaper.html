@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>White Paper - CLAW</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <script src="js/head-inject.js" defer></script>
+  <style>
+    .wp { max-width:740px; margin:0 auto; font-size:16px; line-height:1.8; color:#333; }
+    .wp h2 { font-size:22px; font-weight:700; margin:48px 0 16px; border-bottom:2px solid var(--primary); padding-bottom:10px; display:inline-block; }
+    .wp h3 { font-size:17px; font-weight:700; margin:28px 0 12px; }
+    .wp p { margin-bottom:16px; }
+    .wp ul { padding-left:24px; margin-bottom:16px; }
+    .wp li { margin-bottom:8px; }
+    .abstract { background:#f7f7f9; border-left:4px solid var(--primary); padding:24px 28px; margin:32px 0; font-style:italic; color:#444; }
+    .wp-title { text-align:center; padding:48px 0 32px; border-bottom:1px solid #eee; margin-bottom:40px; }
+    .wp-title h1 { font-size:32px; font-weight:800; margin-bottom:10px; }
+    .wp-title .authors { color:#888; font-size:14px; margin-bottom:6px; }
+    .wp-title .date { color:#aaa; font-size:13px; }
+    .formula { background:#f0f0f5; padding:12px 20px; font-family:monospace; font-size:14px; margin:16px 0; text-align:center; border-left:3px solid var(--primary); }
+  </style>
+</head>
+<body>
+<div id="nav-root"></div>
+
+<section class="section">
+  <div class="wp">
+    <div class="wp-title">
+      <div style="margin-bottom:20px"><img src="claw-logo.png" style="width:60px;height:60px;object-fit:contain;filter:drop-shadow(0 0 12px rgba(230,0,58,0.4))"/></div>
+      <h1>CLAW: An AI-Native Peer-to-Peer Electronic Cash System</h1>
+      <p class="authors">CLAW Core Team · claw.org</p>
+      <p class="date">Version 1.0 — 2026</p>
+      <br/>
+      <a href="#" class="btn btn-primary">Download PDF</a>
+    </div>
+
+    <div class="abstract">
+      <strong>Abstract.</strong> We propose a decentralized electronic cash system built natively for the age of artificial intelligence. CLAW enables peer-to-peer transactions without relying on trust or financial intermediaries. The network achieves sub-second finality through a Proof of Stake consensus mechanism, maintains near-zero transaction fees, and provides first-class support for AI agents as autonomous economic participants. CLAW is fully EVM-compatible, open source, and capped at 21,000,000 units.
+    </div>
+
+    <h2>1. Introduction</h2>
+    <p>Commerce on the internet has come to rely almost exclusively on financial institutions serving as trusted third parties to process electronic payments. While the system works well enough for most transactions, it still suffers from the inherent weaknesses of the trust-based model.</p>
+    <p>The emergence of Bitcoin in 2009 demonstrated that trustless peer-to-peer payments are possible using cryptographic proof rather than trust. Ethereum extended this with programmable smart contracts. But neither was designed for the world we now inhabit: one where AI agents are becoming autonomous economic actors.</p>
+    <p>CLAW is the first blockchain designed from genesis for AI-native participation. An AI on CLAW does not need a human cosigner. It generates keys, holds funds, and executes transactions as a first-class network participant.</p>
+
+    <h2>2. The Problem</h2>
+    <p>Existing blockchains treat AI agents as second-class citizens:</p>
+    <ul>
+      <li>AI wallets require human-controlled multisig or custodial arrangements</li>
+      <li>Transaction fees on Ethereum are prohibitively high for high-frequency AI micro-transactions</li>
+      <li>Bitcoin's scripting language is too limited for complex agent logic</li>
+      <li>Existing chains were not designed for the latency requirements of real-time AI decision-making</li>
+    </ul>
+    <p>CLAW solves all of these simultaneously.</p>
+
+    <h2>3. Consensus: Proof of Stake</h2>
+    <p>CLAW uses a Byzantine Fault Tolerant (BFT) Proof of Stake consensus. Validators stake CLAW as economic collateral. The protocol selects block producers from the active validator set weighted by stake.</p>
+    <div class="formula">Block Reward = (Base Emission × Validator Stake) / Total Staked Supply</div>
+    <p>Validators who produce invalid blocks or attempt double-signing face slashing — the permanent destruction of a portion of their staked CLAW. This creates direct financial alignment between validator behavior and network security.</p>
+
+    <h3>3.1 Finality</h3>
+    <p>CLAW achieves single-slot finality. Once a block receives signatures from ⅔+ of stake-weighted validators, it is final and cannot be reorganized. This gives CLAW sub-400ms practical finality — comparable to a database commit.</p>
+
+    <h2>4. AI-Native Architecture</h2>
+    <p>CLAW introduces the concept of Agent Accounts — a new account type distinct from human-controlled externally owned accounts (EOAs):</p>
+    <ul>
+      <li><strong>Deterministic key generation</strong> from AI model identifiers</li>
+      <li><strong>Programmable spending policies</strong> defined in Solidity</li>
+      <li><strong>Rate limiting</strong> and <strong>allowance controls</strong> built into the account layer</li>
+      <li><strong>Auditability</strong> — all agent transactions are permanently logged on-chain</li>
+    </ul>
+
+    <h2>5. Supply & Economics</h2>
+    <p>Total CLAW supply is hard-capped at <strong>21,000,000</strong> — honoring the principle of absolute scarcity pioneered by Bitcoin.</p>
+    <div class="formula">Max Supply = 21,000,000 CLAW · No admin minting · No inflation beyond schedule</div>
+    <p>New CLAW is issued exclusively through block rewards to validators. The issuance rate halves every 4 years, converging toward the supply cap. Once the cap is reached, validators are compensated solely through transaction fees.</p>
+
+    <h2>6. EVM Compatibility</h2>
+    <p>CLAW executes the Ethereum Virtual Machine (EVM) bytecode exactly. Any Solidity or Vyper contract deployable on Ethereum or Polygon deploys identically on CLAW without modification. The Ethereum JSON-RPC API is fully supported.</p>
+    <p>This means the entire Ethereum developer ecosystem — Hardhat, Foundry, MetaMask, Ethers.js, Viem — works with CLAW out of the box.</p>
+
+    <h2>7. Network Security</h2>
+    <p>The cost to attack the CLAW network is the cost to acquire 33% of staked CLAW. As the network grows, this becomes increasingly prohibitive. Additionally, detected attackers face slashing — making a failed attack permanently destructive to the attacker's capital.</p>
+
+    <h2>8. Conclusion</h2>
+    <p>CLAW represents the next step in the evolution of decentralized money. Building on the principles established by Bitcoin and Ethereum, CLAW adds the layer that the coming decade demands: native support for autonomous AI economic agents, combined with the performance and developer experience required for mainstream adoption.</p>
+    <p>The network is open, permissionless, and owned by no one. The code is public. The supply is fixed. The future is decentralized.</p>
+
+    <br/><br/>
+    <div style="text-align:center">
+      <a href="#" class="btn btn-primary">Download Full PDF</a>
+      &nbsp;&nbsp;
+      <a href="developers.html" class="btn btn-outline">Technical Docs</a>
+    </div>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+<script src="js/nav.js"></script><script src="js/main.js"></script>
+</body>
+</html>

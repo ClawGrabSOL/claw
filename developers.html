@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Developers - CLAW</title>
+  <link rel="stylesheet" href="css/style.css"/>
+  <script src="js/head-inject.js" defer></script>
+  <style>
+    pre { background:#0d0d14; color:#e8e8e8; padding:20px 24px; font-size:13px; line-height:1.7; overflow-x:auto; margin:16px 0; border-left:3px solid var(--primary); }
+    code { font-family:'Courier New',monospace; }
+    .code-tab-bar { display:flex; gap:0; border-bottom:1px solid #2a2a3a; background:#0a0a0f; }
+    .code-tab { padding:10px 20px; font-size:12px; color:#666; cursor:pointer; font-weight:600; letter-spacing:1px; text-transform:uppercase; border-bottom:2px solid transparent; }
+    .code-tab.active { color:var(--primary); border-bottom-color:var(--primary); }
+  </style>
+</head>
+<body>
+<div id="nav-root"></div>
+<div class="page-hero">
+  <h1>Build on CLAW</h1>
+  <p>Full developer documentation, SDKs, and tools for building on the CLAW network.</p>
+</div>
+
+<section class="section">
+  <div class="section-wide">
+    <div class="grid-3" style="margin-bottom:60px">
+      <a href="#quickstart" class="card reveal" style="text-decoration:none">
+        <div class="card-icon">🚀</div>
+        <h3>Quick Start</h3>
+        <p>Deploy your first contract on CLAW in under 5 minutes.</p>
+      </a>
+      <a href="#sdk" class="card reveal" style="text-decoration:none">
+        <div class="card-icon">📦</div>
+        <h3>SDK & Libraries</h3>
+        <p>Official CLAW SDK for JavaScript, Python, Rust, and Go.</p>
+      </a>
+      <a href="#ai" class="card reveal" style="text-decoration:none">
+        <div class="card-icon">🤖</div>
+        <h3>AI Agent SDK</h3>
+        <p>Give your AI agents native wallet and transaction capabilities.</p>
+      </a>
+    </div>
+
+    <div id="quickstart">
+      <p class="section-label">Quick Start</p>
+      <h2 class="section-title">Connect to CLAW in minutes</h2>
+      <p style="color:#666;margin-bottom:24px">CLAW is EVM-compatible. If you know Ethereum development, you already know CLAW.</p>
+
+      <div style="background:var(--dark);border-radius:2px;overflow:hidden;margin-bottom:40px">
+        <div class="code-tab-bar">
+          <div class="code-tab active">JavaScript</div>
+          <div class="code-tab">Python</div>
+          <div class="code-tab">Rust</div>
+        </div>
+        <pre><code><span style="color:#e6003a">// Install: npm install @claw-network/sdk</span>
+
+<span style="color:#7b9fff">import</span> { ClawClient, Wallet } <span style="color:#7b9fff">from</span> <span style="color:#a8d8a8">'@claw-network/sdk'</span>;
+
+<span style="color:#e6003a">// Connect to CLAW mainnet</span>
+<span style="color:#7b9fff">const</span> client = <span style="color:#7b9fff">new</span> ClawClient({
+  rpc: <span style="color:#a8d8a8">'https://rpc.claw.org'</span>,
+  network: <span style="color:#a8d8a8">'mainnet'</span>
+});
+
+<span style="color:#e6003a">// Create a wallet</span>
+<span style="color:#7b9fff">const</span> wallet = Wallet.generate();
+console.log(<span style="color:#a8d8a8">'Address:'</span>, wallet.address);
+
+<span style="color:#e6003a">// Send CLAW</span>
+<span style="color:#7b9fff">const</span> tx = <span style="color:#7b9fff">await</span> client.send({
+  from: wallet,
+  to: <span style="color:#a8d8a8">'claw1abc...xyz'</span>,
+  amount: <span style="color:#a8d8a8">'10.5'</span>,     <span style="color:#e6003a">// CLAW</span>
+  memo: <span style="color:#a8d8a8">'gm'</span>
+});
+
+console.log(<span style="color:#a8d8a8">'Tx hash:'</span>, tx.hash);
+<span style="color:#e6003a">// Confirmed in ~400ms</span></code></pre>
+      </div>
+    </div>
+
+    <div id="ai" style="margin-top:48px">
+      <p class="section-label">AI Agents</p>
+      <h2 class="section-title">Native AI Agent Support</h2>
+      <p style="color:#666;margin-bottom:24px">CLAW is the only blockchain with first-class AI agent support. Agents can own wallets, sign transactions, and interact with contracts autonomously.</p>
+
+      <div style="background:var(--dark);border-radius:2px;overflow:hidden;margin-bottom:40px">
+        <div class="code-tab-bar">
+          <div class="code-tab active">Python (LangChain)</div>
+          <div class="code-tab">Node.js</div>
+        </div>
+        <pre><code><span style="color:#e6003a"># pip install claw-sdk langchain</span>
+
+<span style="color:#7b9fff">from</span> claw_sdk <span style="color:#7b9fff">import</span> AgentWallet, ClawTool
+<span style="color:#7b9fff">from</span> langchain.agents <span style="color:#7b9fff">import</span> initialize_agent
+
+<span style="color:#e6003a"># Create a wallet for your agent</span>
+agent_wallet = AgentWallet.create(name=<span style="color:#a8d8a8">"my-trading-agent"</span>)
+print(<span style="color:#a8d8a8">f"Agent address: {agent_wallet.address}"</span>)
+
+<span style="color:#e6003a"># Give the agent CLAW tools</span>
+tools = [
+    ClawTool.send_payment(wallet=agent_wallet),
+    ClawTool.check_balance(wallet=agent_wallet),
+    ClawTool.call_contract(wallet=agent_wallet),
+]
+
+<span style="color:#e6003a"># Agent can now autonomously transact</span>
+agent = initialize_agent(tools, llm, agent=<span style="color:#a8d8a8">"zero-shot-react"</span>)
+agent.run(<span style="color:#a8d8a8">"Send 5 CLAW to claw1xyz... for the invoice"</span>)</code></pre>
+      </div>
+    </div>
+
+    <div id="sdk" style="margin-top:48px">
+      <p class="section-label">Network Info</p>
+      <h2 class="section-title">RPC & Chain Details</h2>
+      <div style="background:#f7f7f9;padding:28px;font-size:14px;font-family:monospace">
+        <div style="display:grid;grid-template-columns:160px 1fr;gap:10px 20px">
+          <span style="color:#888">Chain ID</span><span style="font-weight:700">7331</span>
+          <span style="color:#888">RPC Mainnet</span><span style="color:var(--primary)">https://rpc.claw.org</span>
+          <span style="color:#888">RPC Testnet</span><span style="color:var(--primary)">https://testnet-rpc.claw.org</span>
+          <span style="color:#888">Explorer</span><span style="color:var(--primary)">https://explorer.claw.org</span>
+          <span style="color:#888">Symbol</span><span style="font-weight:700">CLAW</span>
+          <span style="color:#888">Decimals</span><span style="font-weight:700">18</span>
+          <span style="color:#888">Block Time</span><span style="font-weight:700">~400ms</span>
+          <span style="color:#888">EVM</span><span style="font-weight:700;color:#00e676">✓ Compatible</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+<script src="js/nav.js"></script><script src="js/main.js"></script>
+</body>
+</html>
